@@ -26,7 +26,7 @@ from qiskit_sliqsim_provider import SliQSimProvider
 # Initiate SliQSim Provider
 provider = SliQSimProvider()
 
-# Construct a 2-qubit bell-state circuit 
+# Construct a 2-qubit bell-state circuit
 qr = QuantumRegister(2)
 cr = ClassicalRegister(2)
 qc = QuantumCircuit(qr, cr)
@@ -45,14 +45,14 @@ job = execute(qc, backend=backend, shots=1024)
 result = job.result()
 print(result.get_counts(qc))
 ```
-In the above [Python code](https://github.com/NTU-ALComLab/Qiskit-SliQSim-Provider/blob/master/sample.py), we construct a 2-qubit bell-state circuit with measurement gates at the end, and execute the simulator with weak simulation backend option `weak_simulator`. The sampled result is then printed:
+In the above [Python code](https://github.com/NTU-ALComLab/Qiskit-SliQSim-Provider/blob/master/samples/sample.py), we construct a 2-qubit bell-state circuit with measurement gates at the end, and execute the simulator with weak simulation backend option `weak_simulator`. The sampled result is then printed:
 ```commandline
 TBA
 ```
 
 Circuits can also be read from files in `OpenQASM` format, which is used by Qiskit. Here we read a [circuit](https://github.com/NTU-ALComLab/SliQSim/blob/master/examples/bell_state.qasm), which is also a 2-qubit bell-state circuit but with no measurements gates, to showcase the strong simulation:
 ```python
-qc = QuantumCircuit.from_qasm_file("SliQSim/examples/bell_state.qasm")
+qc = QuantumCircuit.from_qasm_file("../SliQSim/examples/bell_state.qasm")
 ```
 To execute the strong simulation, the backend option `weak_simulator` is replaced with `strong_simulator`:
 ```python
@@ -79,7 +79,7 @@ Please cite the following paper if you use our simulator for your research:
 
 ```bibtex
 @misc{tsai2020bitslicing,
-      title={Bit-Slicing the Hilbert Space: Scaling Up Accurate Quantum Circuit Simulation to a New Level}, 
+      title={Bit-Slicing the Hilbert Space: Scaling Up Accurate Quantum Circuit Simulation to a New Level},
       author={Yuan{-}Hung Tsai and Jie{-}Hong R. Jiang and Chiao{-}Shan Jhang},
       year={2020},
       note={arXiv: 2007.09304}

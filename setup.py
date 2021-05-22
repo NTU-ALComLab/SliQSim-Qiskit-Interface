@@ -23,7 +23,7 @@ class SliQSimBuild(build):
         logger.info('[*]  Running make for SliQSim and cudd...')
         call(["make","-j"])
         os.chdir(curdir)
-        shutil.copyfile("SliQSim/SliQSim", "build/lib/qiskit_sliqsim_provider/SliQSim")
+        shutil.move("SliQSim/SliQSim", "build/lib/qiskit_sliqsim_provider/SliQSim")
 # This is for creating wheel specific platforms
 class BinaryDistribution(Distribution):
     def has_ext_modules(self):

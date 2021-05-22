@@ -143,6 +143,7 @@ class SliQSimWrapper:
         return qasm_content
 
 
+
 class SimulatorBase(BaseBackend, abc.ABC):
     DEFAULT_CONFIGURATION = {
         'coupling_map': None,
@@ -166,12 +167,18 @@ class SimulatorBase(BaseBackend, abc.ABC):
             }
         ]
     }
+
     EXTENSION = '.exe' if platform.system() == 'Windows' else ''
 
-    DEFAULT_SIMULATOR_PATH = [os.path.abspath(os.path.join(
-        os.path.dirname(__file__), '../SliQSim/SliQSim'+EXTENSION)),os.path.abspath(os.path.join(
-        os.path.dirname(__file__), './SliQSim'+EXTENSION))]
-
+    DEFAULT_SIMULATOR_PATHS = [
+    # This is the path where make creates  the binary
+    os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                 '../build/lib/qiskit_sliqsim_provider/SliQSim'
+                                 + EXTENSION)),
+    # This is the path where PIP installs the simulator
+    os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                 './SliQSim' + EXTENSION)),
+]
     def __init__(self, configuration=None, provider=None):
         """
         Args:
@@ -183,7 +190,7 @@ class SimulatorBase(BaseBackend, abc.ABC):
                                         BackendConfiguration.from_dict(self.DEFAULT_CONFIGURATION)),
                          provider=provider)
 
-        paths = self.DEFAULT_SIMULATOR_PATH
+        paths = self.DEFAULT_SIMULATOR_PATHS
         # Ensure that the executable is available.
         try:
             self.executable = next(

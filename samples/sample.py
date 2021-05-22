@@ -15,7 +15,7 @@ qc.cx(qr[0], qr[1])
 qc.measure(qr, cr)
 
 # Read a circuit from a .qasm file
-# qc = QuantumCircuit.from_qasm_file("SliQSim/examples/bell_state.qasm")
+# qc = QuantumCircuit.from_qasm_file("../SliQSim/examples/bell_state.qasm")
 
 # Get the backend of weak simulation
 backend = provider.get_backend('weak_simulator')
