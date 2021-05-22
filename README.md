@@ -10,7 +10,7 @@ To use this provider, one should first install IBM's [Qiskit](https://github.com
 
 ```commandline
 pip install qiskit
-pip install qiskit-sliqsim-provider
+pip install qiskit-SliQSim-provider
 ```
 
 ## Execution

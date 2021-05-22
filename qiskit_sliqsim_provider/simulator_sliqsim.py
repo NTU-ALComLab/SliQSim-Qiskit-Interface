@@ -66,18 +66,6 @@ class SliQSimWrapper:
             return None
         return hex(int(s, 2))
 
-    def final_statevector(self, run_output):
-        """
-        Retrieves the statevector at the end of the computation
-        """
-        return run_output["snapshots"]["1"]["statevector"]
-
-    def convert_snapshot(self, snapshot_data):
-        if 'statevector' in snapshot_data:
-            snapshot_data['statevector'] = self.convert_statevector_data(
-                snapshot_data['statevector'])
-        return snapshot_data
-
     def to_qiskit_complex(self, num_string):
         # first obtain an actual number
         num = complex(num_string.replace('i', 'j'))
@@ -89,9 +77,7 @@ class SliQSimWrapper:
             result['counts'] = self.convert_counts(
                 result['counts'])
         if 'statevector' in result:
-            snapshots_data = {'1': self.convert_snapshot({'statevector': result['statevector']})}
-            result['snapshots'] = snapshots_data
-            result['statevector'] = self.final_statevector(result)
+            result['statevector'] = self.convert_statevector_data(result['statevector'])
         return result
 
     def run_experiment(self, config, experiment):
@@ -114,7 +100,7 @@ class SliQSimWrapper:
         return result_dict
 
     def convert_operation_to_line(self, op, qubit_names, clbit_names):
-        """convert one operation from the qobj file to a QASM line in the format AKCom can handle"""
+        """convert one operation from the qobj file to a QASM line in the format SliQSim can handle"""
         name_string = op.name
         qubits_string = ", ".join([qubit_names[i] for i in op.qubits])
         if hasattr(op, 'params') and len(op.params) > 0:
