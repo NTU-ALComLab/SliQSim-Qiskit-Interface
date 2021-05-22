@@ -153,7 +153,7 @@ class SimulatorBase(BaseBackend, abc.ABC):
         'simulator': True,
         'local': True,
         'description': 'SliQSim C++ simulator',
-        'basis_gates': ['cx', 'x', 'y', 'z', 'h', 's', 't', 'sdg', 'tdg', 'rx', 'ry', 'cz', 'ccx', 'cswap'],
+        'basis_gates': ['cx', 'x', 'y', 'z', 'h', 's', 't', 'sdg', 'tdg', 'rx', 'ry', 'cz', 'ccx', 'mcx', 'swap', 'cswap'],
         'memory': False,
         'n_qubits': 30,
         'conditional': False,

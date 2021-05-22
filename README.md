@@ -14,7 +14,7 @@ pip install qiskit-sliqsim-provider
 ```
 
 ## Execution
-The gate set supported in `SliQSim` now contains Pauli-X (x), Pauli-Y (y), Pauli-Z (z), Hadamard (h), Phase and its inverse (s and sdg), π/8 and its inverse (t and tdg), Rotation-X with phase π/2 (rx(pi/2)), Rotation-Y with phase π/2 (ry(pi/2)), Controlled-NOT (cx), Controlled-Z (cz), Toffoli (ccx), and Fredkin (cswap).
+The gate set supported in SliQSim now contains Pauli-X (x), Pauli-Y (y), Pauli-Z (z), Hadamard (h), Phase and its inverse (s and sdg), π/8 and its inverse (t and tdg), Rotation-X with phase π/2 (rx(pi/2)), Rotation-Y with phase π/2 (ry(pi/2)), Controlled-NOT (cx), Controlled-Z (cz), Toffoli (ccx and mcx), SWAP (swap), and Fredkin (cswap).
 
 For simulation types, we provide both weak and strong simulation options, where the weak simulation samples outcomes from the output distribution obtained after the circuit is applied, and the strong simulation calculates the resulting state vector of the quantum circuit. The following examples demostrate the usage of the provider.
 
