@@ -47,7 +47,7 @@ print(result.get_counts(qc))
 ```
 In the above [Python code](https://github.com/NTU-ALComLab/Qiskit-SliQSim-Provider/blob/master/samples/sample.py), we construct a 2-qubit bell-state circuit with measurement gates at the end, and execute the simulator with weak simulation backend option `weak_simulator`. The sampled result is then printed:
 ```commandline
-TBA
+{'00': 523, '11': 501}
 ```
 
 Circuits can also be read from files in `OpenQASM` format, which is used by Qiskit. Here we read a [circuit](https://github.com/NTU-ALComLab/SliQSim/blob/master/examples/bell_state.qasm), which is also a 2-qubit bell-state circuit but with no measurements gates, to showcase the strong simulation:
@@ -64,7 +64,7 @@ print(result.get_statevector(qc))
 ```
 The state vector is then printed:
 ```commandline
-TBA
+[0.707107+0.j 0.      +0.j 0.      +0.j 0.707107+0.j]
 ```
 
 One may also use our simulator by executing a compiled binary file. Check this [repo](https://github.com/NTU-ALComLab/SliQSim).
