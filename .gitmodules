@@ -1,0 +1,3 @@
+[submodule "SliQSim"]
+	path = SliQSim
+	url = git@github.com:NTU-ALComLab/SliQSim.git

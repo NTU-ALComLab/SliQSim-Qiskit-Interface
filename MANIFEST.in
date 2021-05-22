@@ -1,0 +1,3 @@
+recursive-include SliQSim *
+include Makefile
+include setup.py
