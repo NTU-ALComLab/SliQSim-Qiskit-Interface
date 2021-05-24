@@ -1,7 +1,7 @@
-# Qiskit SliQSim Provider - Execute SliQSim from Qiskit
+# SliQSim Qiskit Interface - Execute SliQSim on Qiskit
 
 ## Introduction
-This is a Qiskit provider for `SliQSim` where you can execute `SliQSim` from Qiskit framework as a backend option.
+This is a Qiskit provider for [SliQSim](https://github.com/NTU-ALComLab/SliQSim) where you can execute `SliQSim` from Qiskit framework as a backend option.
 
 `SliQSim` is a BDD-based quantum circuit simulator implemented in C/C++ on top of [CUDD](http://web.mit.edu/sage/export/tmp/y/usr/share/doc/polybori/cudd/cuddIntro.html) package. In `SliQSim`, a bit-slicing technique based on BDDs is used to represent quantum state vectors. For more details of the simulator, please refer to the [paper](https://arxiv.org/abs/2007.09304).
 
@@ -10,7 +10,7 @@ To use this provider, one should first install IBM's [Qiskit](https://github.com
 
 ```commandline
 pip install qiskit
-pip install qiskit-SliQSim-provider
+pip install qiskit-sliqsim-provider
 ```
 
 ## Execution
