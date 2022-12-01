@@ -1,5 +1,9 @@
 # SliQSim Qiskit Interface - Execute SliQSim on Qiskit
 
+## [Note]
+We have found an issue with interpreting rx(pi/2) and ry(pi/2) gates. The new version will be uploaded as soon as we fix it.
+
+
 ## Introduction
 This is a Qiskit provider for [SliQSim](https://github.com/NTU-ALComLab/SliQSim) where you can execute `SliQSim` from Qiskit framework as a backend option.
 
