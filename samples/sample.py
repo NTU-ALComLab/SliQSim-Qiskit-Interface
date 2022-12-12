@@ -17,14 +17,14 @@ qc.measure(qr, cr)
 # Read a circuit from a .qasm file
 # qc = QuantumCircuit.from_qasm_file("../SliQSim/examples/bell_state.qasm")
 
-# Get the backend of weak simulation
-backend = provider.get_backend('weak_simulator')
+# Get the backend of sampling simulation
+backend = provider.get_backend('sampling')
 
-# Get the backend of strong simulation
-# backend = provider.get_backend('strong_simulator')
+# Get the backend of statevector simulation
+# backend = provider.get_backend('all_amplitude')
 
 # Execute simulation
-job = execute(qc, backend=backend, shots=1024)
+job = execute(qc, backend=backend, shots=1024, optimization_level=0)
 
 # Obtain and print the results
 result = job.result()
