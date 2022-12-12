@@ -104,13 +104,8 @@ class SliQSimWrapper:
         name_string = op.name
         qubits_string = ", ".join([qubit_names[i] for i in op.qubits])
         if hasattr(op, 'params') and len(op.params) > 0:
-            denominator = round(3.14159/op.params[0])
-            if denominator not in [2,-2]:
-                raise Exception('Only rx/ry(+-pi/2) are supported yet. Make sure that the circuit is made up by supported gates and the optimization is turned off.')
-            if denominator==2:
-                params_string = '(pi/2)'
-            elif denominator==-2:
-                params_string = '(-pi/2)'
+            params_string = "({})".format(
+                ", ".join([str(p) for p in op.params]))
         else:
             params_string = ""
         if name_string == "measure":  # special syntax
@@ -229,7 +224,7 @@ class QasmSimulator(SimulatorBase):
         for experiment in qobj.experiments:
             result_list.append(s.run_experiment(qobj.config, experiment))
         end = time.time()
-        result = {'backend_name': 'sampling',
+        result = {'backend_name': 'weak_simulator',
                   'backend_version': self._configuration.backend_version,
                   'qobj_id': qobj.qobj_id,
                   'job_id': job_id,
@@ -262,7 +257,7 @@ class StatevectorSimulator(SimulatorBase):
         for experiment in qobj.experiments:
             result_list.append(s.run_experiment(qobj.config, experiment))
         end = time.time()
-        result = {'backend_name': 'all_amplitude',
+        result = {'backend_name': 'strong_simulator',
                   'backend_version': self._configuration.backend_version,
                   'qobj_id': qobj.qobj_id,
                   'job_id': job_id,

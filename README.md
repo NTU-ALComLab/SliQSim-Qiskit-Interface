@@ -1,22 +1,26 @@
 # SliQSim Qiskit Interface - Execute SliQSim on Qiskit
 
+## [Note]
+We have found an issue with interpreting rx(pi/2) and ry(pi/2) gates. The new version will be uploaded as soon as we fix it.
+
+
 ## Introduction
 This is a Qiskit provider for [SliQSim](https://github.com/NTU-ALComLab/SliQSim) where you can execute `SliQSim` from Qiskit framework as a backend option.
 
 `SliQSim` is a BDD-based quantum circuit simulator implemented in C/C++ on top of [CUDD](http://web.mit.edu/sage/export/tmp/y/usr/share/doc/polybori/cudd/cuddIntro.html) package. In `SliQSim`, a bit-slicing technique based on BDDs is used to represent quantum state vectors. For more details of the simulator, please refer to the [paper](https://arxiv.org/abs/2007.09304).
 
 ## Installation
-To use this provider, one should first install IBM's [Qiskit](https://github.com/Qiskit/qiskit) (<=0.36.2), and then install the provider with pip.
+To use this provider, one should first install IBM's [Qiskit](https://github.com/Qiskit/qiskit), and then install the provider with pip.
 
 ```commandline
-pip install qiskit==0.36.2
+pip install qiskit
 pip install qiskit-sliqsim-provider
 ```
 
 ## Execution
 The gate set supported in SliQSim now contains Pauli-X (x), Pauli-Y (y), Pauli-Z (z), Hadamard (h), Phase and its inverse (s and sdg), π/8 and its inverse (t and tdg), Rotation-X with phase π/2 (rx(pi/2)), Rotation-Y with phase π/2 (ry(pi/2)), Controlled-NOT (cx), Controlled-Z (cz), Toffoli (ccx and mcx), SWAP (swap), and Fredkin (cswap).
 
-For simulation types, we provide both sampling(default) and statevector simulation options, where the sampling simulation samples outcomes from the output distribution obtained after the circuit is applied, and the statevector simulation calculates the resulting state vector of the quantum circuit. Please turn off the optimization (`optimization_level=0`) to avoid using gates out of supported gate set. The following examples demostrate the usage of the provider.
+For simulation types, we provide both weak and strong simulation options, where the weak simulation samples outcomes from the output distribution obtained after the circuit is applied, and the strong simulation calculates the resulting state vector of the quantum circuit. The following examples demostrate the usage of the provider.
 
 ```python
 # Import tools
@@ -35,33 +39,31 @@ qc.h(qr[0])
 qc.cx(qr[0], qr[1])
 qc.measure(qr, cr)
 
-# Get the backend of sampling simulation
-backend = provider.get_backend('sampling')
+# Get the backend of weak simulation
+backend = provider.get_backend('weak_simulator')
 
 # Execute simulation
-job = execute(qc, backend=backend, shots=1024, optimization_level=0)
+job = execute(qc, backend=backend, shots=1024)
 
 # Obtain and print the results
 result = job.result()
 print(result.get_counts(qc))
 ```
-In the above [Python code](https://github.com/NTU-ALComLab/Qiskit-SliQSim-Provider/blob/master/samples/sample.py), we construct a 2-qubit bell-state circuit with measurement gates at the end, and execute the simulator with sampling simulation backend option `sampling`. The sampled result is then printed:
+In the above [Python code](https://github.com/NTU-ALComLab/Qiskit-SliQSim-Provider/blob/master/samples/sample.py), we construct a 2-qubit bell-state circuit with measurement gates at the end, and execute the simulator with weak simulation backend option `weak_simulator`. The sampled result is then printed:
 ```commandline
 {'00': 523, '11': 501}
 ```
 
-Circuits can also be read from files in `OpenQASM` format, which is used by Qiskit. Here we read a [circuit](https://github.com/NTU-ALComLab/SliQSim/blob/master/examples/bell_state.qasm), which is also a 2-qubit bell-state circuit but with no measurements gates, to showcase the statevector simulation:
+Circuits can also be read from files in `OpenQASM` format, which is used by Qiskit. Here we read a [circuit](https://github.com/NTU-ALComLab/SliQSim/blob/master/examples/bell_state.qasm), which is also a 2-qubit bell-state circuit but with no measurements gates, to showcase the strong simulation:
 ```python
 qc = QuantumCircuit.from_qasm_file("../SliQSim/examples/bell_state.qasm")
 ```
-To execute the statevector simulation, the backend option `sampling` is replaced with `all_amplitude`:
+To execute the strong simulation, the backend option `weak_simulator` is replaced with `strong_simulator`:
 ```python
-backend = provider.get_backend('all_amplitude')
-job = execute(qc, backend=backend, optimization_level=0)
+backend = provider.get_backend('strong_simulator')
 ```
 and after obtaining the results, we acquire the state vector instead of the counts of sampled outcomes:
 ```python
-result = job.result()
 print(result.get_statevector(qc))
 ```
 The state vector is then printed:

@@ -7,11 +7,11 @@ class SliQSimProvider(BaseProvider):
         super().__init__(args, kwargs)
 
         # Populate the list of local SliQSim backends.
-        self.backends_list = {'sampling': QasmSimulator(provider=self),
-                              'all_amplitude': StatevectorSimulator(provider=self)
+        self.backends_list = {'weak_simulator': QasmSimulator(provider=self),
+                              'strong_simulator': StatevectorSimulator(provider=self)
                               }
 
-    def get_backend(self, name='sampling', **kwargs):
+    def get_backend(self, name, **kwargs):
         return self.backends_list[name]
 
     def available_backends(self, filters=None):
