@@ -32,7 +32,7 @@ class BinaryDistribution(Distribution):
 
 setuptools.setup(
     name="qiskit-sliqsim-provider", # Replace with your own username
-    version="0.0.6",
+    version="0.0.7",
     author="Yuan-Hung Tsai, Jie-Hong R. Jiang, Chiao-Shan Jhang, Justin Chen",
     author_email="matthewyhtsai@gmail.com",
     description="SliQSim simulator",
